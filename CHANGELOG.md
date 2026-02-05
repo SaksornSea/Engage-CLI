@@ -21,6 +21,7 @@ Added:
 * Ability to change accounts from the action selector
 * Ability to select another action after an action is completed
 * (Sort of) Cleaner interface
+
 Removed:
 * Extra prints for debugging (cookies received from the server)
 
