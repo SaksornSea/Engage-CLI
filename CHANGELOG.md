@@ -1,6 +1,17 @@
 # Engage-CLI Changeslogs
 
-These are well.. Changelogs for Engage-CLI that go back to the very start (Please note that Version 1.3 was the first version to be added to this Github reposiory, any versions before this version are not here.)
+These are well.. Changelogs for Engage-CLI that go back to the very start (Please note that Version 1.3 was the first version to be added to this Github reposiory, any versions before this version are not in the commit logs.)
+
+### Version 1.4
+#### Released on 11/2/25
+Added:
+* Engage CLI to Github for "Google search compliance" reasons..
+
+Removed:
+* Downloads in setup (other than the library setups)
+
+Changed:
+* Moving the update checks to the version text file in this Github Repo (Also included the old php file for update checks)
 
 ### Version 1.3
 #### Released on 25/12/25

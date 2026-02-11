@@ -1,64 +1,49 @@
 import subprocess
 import sys
+import os
+import importlib.util
 
-
-download_url = "https://sea.navynui.cc/tools/engage/assets/engage.txt"
 
 print("Welcome to the Engage CLI Setup Wizard!")
 print("By Sea :)")
 
+def check_and_install_package(package_name, import_name):
+    """Checks if a package is installed and installs it if not."""
+    spec = importlib.util.find_spec(import_name)
+    if spec is None:
+        print(f"Package '{import_name}' not found. Attempting to install '{package_name}'...")
+        pip_command = [sys.executable, "-m", "pip", "install", package_name]
+
+        # Check if running in a virtual environment
+        # sys.prefix == sys.base_prefix indicates not in a virtual environment
+        if sys.prefix == sys.base_prefix:
+            # Not in a virtual environment, add --break-system-packages as requested
+            print("Warning: Not in a virtual environment. Using --break-system-packages.")
+            pip_command.append("--break-system-packages")
+        else:
+            print("Detected virtual environment. Installing without --break-system-packages.")
+
+        try:
+            subprocess.check_call(pip_command)
+            print(f"Successfully installed '{package_name}'.")
+        except subprocess.CalledProcessError as e:
+            print(f"Error installing '{package_name}': {e}")
+            print("Please ensure pip is installed and accessible, or try running in a virtual environment.")
+            sys.exit(1)
+    else:
+        print(f"Package '{import_name}' is already installed.")
+
 print("\n" + "-" * 50)
-print("1. Install Librares")
-print("2. Download engage.py")
-print("3. Create engage.config")
+print("1. Installing dependencies")
 print("-" * 50 + "\n")
 
+check_and_install_package("requests", "requests")
+check_and_install_package("beautifulsoup4", "bs4")
 
-def install_package(package_name):
-    """
-    Installs a specified Python package using pip via subprocess.
-    """
-    try:
-        subprocess.check_call([sys.executable, "-m", "pip", "install", package_name, "--break-system-packages"])
-        print(f"Successfully installed {package_name}")
-    except subprocess.CalledProcessError as e:
-        print(f"Failed to install {package_name}: {e}")
+print("\n" + "-" * 50)
+print("2. Create engage.config")
+print("-" * 50 + "\n")
 
-def download_file(url, filename):
-    """
-    Downloads a file from a URL using the requests library.
-    """
-    try:
-        # Send a GET request to the URL
-        response = requests.get(url, allow_redirects=True)
-        # Check if the request was successful (status code 200)
-        response.raise_for_status()
-
-        # Open a file in binary write mode ('wb') and write the content
-        with open(filename, 'wb') as f:
-            f.write(response.content)
-        print(f"File '{filename}' downloaded successfully.")
-
-    except requests.exceptions.RequestException as e:
-        print(f"Download failed: {e}")
-        exit(1)
-
-
-# install packages
-install_package("requests")
-install_package("bs4")
-try:
-    import requests
-    print("\nLibrares downloaded and imported successfully!\n")
-except ImportError:
-    print("\nERROR: Librares could not be imported\n")
-    exit(0)
-
-
-# Download file
-print("Downloading engage.py...")
-save_as_filename = 'engage.py'
-download_file(download_url, save_as_filename)
 
 print("\nTime to create the config file!")
 print("\n")

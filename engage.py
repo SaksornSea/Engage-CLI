@@ -5,7 +5,7 @@ import os
 from bs4 import BeautifulSoup
 from datetime import datetime, timedelta
 
-version = "1.3"
+version = "1.4"
 
 print("Engage CLI Version " + version)
 print("By Sea :)")
@@ -720,7 +720,7 @@ def getinbox():
     
 
 def info():
-    get_version_url = "https://sea.navynui.cc/tools/engage/update.php"
+    get_version_url = "https://raw.githubusercontent.com/SaksornSea/Engage-CLI/refs/heads/main/version.txt"
     
     latest_version = "Checking..."
     update_available = ""
