@@ -3,7 +3,7 @@ A python script to use the Engage school management portal though the terminal..
 
 ## Notes
 This only works for student and parent accounts. And I don't know if this works on all schools, but it dose work on my school. There are 2 versons of Engage CLI available :
-* Full version : includes a nice (and buggy) TUI interface and is NOT recomended for use.
+* Full version : includes a nice (and buggy) TUI interface and is NOT recomended for use. (Future thing I want to make, don't really want to though..)
 * Slim version : Doesn't have a TUI interface. More stable.
 
 ## Installation Instructions
